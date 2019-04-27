@@ -1,4 +1,6 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
   mode: 'development',
   entry: {
@@ -11,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jpg|png|jepg|gif$/,
+        test: /\.jpg|png|jepg|gif|svg$/,
         use: {
           loader: "url-loader",//url-loader的使用必须安装file-loader
           options: {
@@ -33,7 +35,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 2, //确保scss文件中引用的其它scss必须通过sass-loader和postcss-loader的加载
-              modules: true //开启css模块化，避免样式冲突
+              //modules: true //开启css模块化，避免样式冲突
             }
           },
           'postcss-loader',
@@ -41,5 +43,9 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new CleanWebpackPlugin()
+  ]
 }
