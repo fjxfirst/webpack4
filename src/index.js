@@ -1,6 +1,5 @@
 import hy from './img/hy.jpg'
 import './style/index.scss'
-import './style/hello.css'
 
 const hyImg = new Image()
 hyImg.src=hy
