@@ -48,4 +48,13 @@ cacheGroups的配置，无论是同步还是异步，都会起作用
                                    }
                                }
                            }
-                           
+                           chunks的默认配置为什么是async,因为异步代码可以提高首屏代码的利用率，所以首屏的加载速度更快
+5.webpack打包分析：  
+webpack --profile --json > stats.json --config build/webpack.dev.js  
+表示把打包过程中的描述放置到stats.json中, https://github.com/webpack/analyse,进入网站后上传stats.json
+6.Prefetching和Preloading，在网络空闲时间加载异步交互的代码，例如某个网站的首页，点击登录按钮挑出登录框的代码是不需要首屏加载的，最好是在首屏加载后的空闲时间再去加载
+使用魔法注释/*webpackPrefetch: true*/，异步加载click.js,这里就不一定是非得点击后才去加载click.js
+和/*webpackPreload: true*/的区别是
+document.addEventListener('click',()=>{
+import(/*webpackPrefetch: true*/,'./click.js').then(()=>{})
+})
