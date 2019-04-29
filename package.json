@@ -1,14 +1,15 @@
 {
   "name": "webpack4",
   "sideEffects": [
-    "@babel/poliy-fill","*.css","*.scss"
+    "@babel/poliy-fill",
+    "*.css",
+    "*.scss"
   ],
   "version": "1.0.0",
   "description": "学习webpack4的使用",
   "private": true,
   "scripts": {
     "build": "webpack --config build/webpack.pro.js",
-    "watch": "webpack --watch --config build/webpack.dev.js",
     "start": "webpack-dev-server --config build/webpack.dev.js",
     "middleware": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,6 +21,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babel-loader": "^8.0.5",
@@ -43,6 +45,8 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.4.4",
-    "@babel/runtime-corejs2": "^7.4.4"
+    "@babel/runtime-corejs2": "^7.4.4",
+    "core-js": "^2.6.5",
+    "lodash": "^4.17.11"
   }
 }
