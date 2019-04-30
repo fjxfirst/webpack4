@@ -1,15 +1,15 @@
 import hy from './img/hy.jpg'
-// import './style/index.scss'
-//import  _ from 'lodash'
+import './style/index.scss'
+import  _ from 'lodash'
 const hyImg = new Image()
 hyImg.src=hy
 hyImg.className='hy'
 document.body.appendChild(hyImg)
 
 
-/*const div1 = document.createElement('div')
+const div1 = document.createElement('div')
 div1.innerHTML='<i class="iconfont hello">&#xe851;</i>'
-document.body.appendChild(div1)*/
+document.body.appendChild(div1)
 console.log(123)
 import './style/style.css'
 const btn =document.createElement('button')
