@@ -12,6 +12,7 @@
     "build": "webpack --config build/webpack.pro.js",
     "start": "webpack-dev-server --config build/webpack.dev.js",
     "middleware": "node server.js",
+    "server":"http-server dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
