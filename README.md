@@ -186,7 +186,7 @@ output:{
                   return '/index.html';
                 }
               } 
-      changeOrigin:true, //突破对origin的限制，例如像爬取别的网站的数据时，说明对origin做了限制
+      changeOrigin:true, //突破对origin的限制，例如像爬取别的网站的数据时，爬取不到，说明对origin做了限制
       headers:{//做转发时可以自己变更请求头
          host:'www.fjx.com',
          cookie:'sdfadfa'
