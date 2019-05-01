@@ -1,9 +1,13 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
 module.exports = {
   entry: {
     index: './src/index.js'
+  },
+  resolve: {
+    extensions: ['.js','.jsx']//当引入模块时如果没有带后缀，会自动加上后缀
   },
   module: {
     rules: [
@@ -50,6 +54,12 @@ module.exports = {
     new CleanWebpackPlugin({
       root:path.resolve(__dirname,'../')
     }),
+    new AddAssetHtmlWebpackPlugin({
+      filepath:path.resolve(__dirname,'../dll/vendors.dll.js')
+    }),
+    new webpack.DllReferencePlugin({
+      mainfest:path.resolve(__dirname,'../dll/vendors.mainfest.json')
+    })
   ],
   optimization: {
     usedExports: true, //在development环境下使用tree shaking
