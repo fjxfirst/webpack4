@@ -195,7 +195,56 @@ output:{
     }
   }
  }
- 15.webpack自定义插件  
+ 15.webpack性能优化
+ ①跟上技术的迭代（node,npm,yarn）
+ ②在尽可能少的模块上应用Loader
+ ③Plugin尽可能精简并确保可靠，就是使用官方推荐的
+ ④resolve参数合理配置,常用的可以配置，资源类的建议不要配，影响性能
+ resolve: {
+     extensions: ['.js','.jsx'],//当引入模块时如果没有带后缀，会自动加上后缀
+     mainFiles:['index','child'], //当引入文件夹时会自动寻找以这些名字命名的文件，也会影响性能
+     alias:{ //配置别名，当引入'fjx'时，就会引入它所代表的路径的模块
+        fjx:path.resolve(__dirname,'../src/child')
+     }
+   }
+ ⑤使用DllPlugin提高打包速度
+  对于第三方库，只需要第一次分析打包，之后不需要再对其进行打包，例如lodash,react,react-dom
+  创建webpack.dll.js,对第三方库进行独立打包,打包生成类似于库的结果，之后使用lodash的时候直接直接用这个库里面的，通过webpack.DllPlugin
+  对lodash等进行映射
+  ```
+  const path=require('path')
+  module.exports={
+    mode:"production",
+    entry:{
+      vendors:['react','react-dom','lodash']
+    },
+    output: {
+      filename: '[name].dll.js',
+      path:path.resolve(__dirname,'../dll'),
+      library: '[name]'
+    },
+    plugin:[ //使用DllPlugin插件来分析这个库，把映射关系放入json文件中
+        new webpack.DllPlugin({
+          name:'[name]',
+          path: path.join(__dirname, '../dll/[name].manifest.json')
+        })
+      ]
+  }
+  ```
+  安装add-asset-html-webpack-plugin插件,在webpack.common.js中引入
+  new AddAssetHtmlWebpackPlugin({
+    filepath:path.resolve(__dirname,'../dll/vendors.js')//生成打包好的库的文件的路径
+  })
+  new webpack.DllReferencePlugin({
+        mainfest:path.resolve(__dirname,'../dll/vendors.mainfest.json')//生成映射json文件的路径
+      })
+  ⑥控制包文件的大小，比如tree-shaking,代码分割
+  ⑦thread-loader,parallel-webpack,happypack多进程打包
+  ⑧合理使用sourceMap
+  ⑨结合stats分析打包结果
+  ⑩开发环境内存编译，开发环境无用的插件剔除
+ 16.多页面打包配置
+ 17.webpack自定义插件  
  class CopyrightWebpackPlugin{  
   constructor(){  
   

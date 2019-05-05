@@ -12,7 +12,8 @@
     "build": "webpack --config build/webpack.pro.js",
     "start": "webpack-dev-server --config build/webpack.dev.js",
     "middleware": "node server.js",
-    "server":"http-server dist",
+    "server": "http-server dist",
+    "build:dll": "webpack --config ./build/webpack.dll.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -25,6 +26,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "add-asset-html-webpack-plugin": "^3.1.3",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
