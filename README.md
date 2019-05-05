@@ -195,3 +195,28 @@ output:{
     }
   }
  }
+ 15.webpack自定义插件  
+ class CopyrightWebpackPlugin{  
+  constructor(){  
+  
+  }  
+  apply(compiler){//complier是webpack的实例 ,包括配置的内容和打包相关的内容
+     compiler.hooks //里面有一些钩子函数，表示某一时刻执行任务
+     //当代码被打包的dist目录之前会执行这个钩子函数
+     compiler.hooks.emit.tapAsync('CopyrightWebpackPlugin',(compilation,cb)=>{//compilation存放本次打包相关的内容  
+     compilation.assets['copyright.txt']={//在dist目录中输出copyright文件
+     source:function(){//返回文件内容
+        return 'copyright by dell lee'
+     },
+     size:funciont(){
+      return 21;
+     }
+     }
+     cb()
+     })
+  }  
+ }  
+ module.exports=CopyrightWebpackPlugin;  
+ 16.node调试  
+ 在package.json中配置一条命令"debug":"node --inspect --inspect-brk node_modules/webpack/bin/webpack.js"  
+ inspect表示开启调试工具，inspect-brk表示在第一行打断点
