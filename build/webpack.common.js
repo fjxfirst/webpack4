@@ -1,25 +1,24 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
-const webpack=require('webpack')
+//const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
+const webpack = require('webpack')
 module.exports = {
   entry: {
     index: './src/index.js'
   },
   resolve: {
-    extensions: ['.js','.jsx']//当引入模块时如果没有带后缀，会自动加上后缀
+    extensions: ['.js', '.jsx']//当引入模块时如果没有带后缀，会自动加上后缀
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use:[{
-          loader: 'babel-loader'
-        },{
-          loader: 'imports-loader?this=>window'
-        }]
+        use: [
+          {
+            loader: 'babel-loader'
+          }]
 
         /*options: {
           //这里的配置可以放在.babelrc中
@@ -52,10 +51,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template:'index.html'
+      template: 'index.html'
     }),
     new CleanWebpackPlugin({
-      root:path.resolve(__dirname,'../')
+      root: path.resolve(__dirname, '../')
     }),
     /*new AddAssetHtmlWebpackPlugin({
       filepath:path.resolve(__dirname,'../dll/vendors.dll.js')
@@ -79,13 +78,13 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/, //判断是不是在node_modules目录下
           priority: -10,//值越大，优先级越高，-10大于-20那么如果一个模块都符合vendors和default，会按照vendors的配置分割代码
-          filename:'vendors.js'
+          filename: 'vendors.js'
         },
         default: {
           minChunks: 2,
           priority: -20,
           reuseExistingChunk: true //表示如果某个模块在打包过程中已经被打包了，就复用之前的，不会对这个模块在进行打包，例如index.js里面引入了a.js和b.js,a.js里面也引入了b.js,这个时候b.js就会复用之前已经被打包的
-    }
+        }
       }
     }
   }

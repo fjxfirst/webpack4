@@ -1,4 +1,3 @@
-/*
 import hy from './img/hy.jpg'
 import './style/index.scss'
 import  _ from 'lodash'
@@ -29,10 +28,7 @@ arr.map((item)=>{
   console.log(item)
 })
 function getComponent() {
-  return import(/!*webpackChunkName:"lodash"*!/ 'lodash')
+  return import(/*webpackChunkName:"lodash"*/ 'lodash')
 }
-getComponent()*/
-import './style/style.css'
-const root = document.getElementById('root')
-const div = document.createElement('div')
-div.innerText='fjx'
+getComponent()
+
