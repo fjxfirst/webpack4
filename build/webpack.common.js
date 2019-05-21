@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
+const webpack=require('webpack')
 module.exports = {
   entry: {
     index: './src/index.js'
@@ -50,16 +51,18 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template:'index.html'
+    }),
     new CleanWebpackPlugin({
       root:path.resolve(__dirname,'../')
     }),
-    new AddAssetHtmlWebpackPlugin({
+    /*new AddAssetHtmlWebpackPlugin({
       filepath:path.resolve(__dirname,'../dll/vendors.dll.js')
     }),
     new webpack.DllReferencePlugin({
       mainfest:path.resolve(__dirname,'../dll/vendors.mainfest.json')
-    })
+    })*/
   ],
   optimization: {
     usedExports: true, //在development环境下使用tree shaking
