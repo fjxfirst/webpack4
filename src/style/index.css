@@ -3,3 +3,17 @@
     height: 140px;
     background-image:url(../img/hy.jpg);
 }
+::placeholder{
+    color:red;
+}
+.container{
+    display: flex;
+}
+@font-face {
+    src:url("../font/iconfont.ttf") format('truetype');
+    font-family: 'hello';
+}
+.welcome{
+    font-size:40px;
+    font-family: 'hello'
+}

@@ -31,6 +31,13 @@ module.exports = {
         rules: [
             {
                 test:/\.(js)$/,
+                loader:'eslint-loader',
+                include: path.join(__dirname,'src'),
+                exclude: /node_modules/,
+                enforce: 'pre' //强制提前执行，babel转义前
+            },
+            {
+                test:/\.(js)$/,
                 use:{
                     loader:'babel-loader',
                     options:{
@@ -73,16 +80,6 @@ module.exports = {
                         //需要重写路径
                         publicPath:'/img',
                         esModule:false
-                    }
-                }
-            },
-            {
-                test: /\.(eot|ttf|woff)$/,
-                // use:'file-loader'
-                use: {
-                    loader: 'url-loader',
-                    options: {
-
                     }
                 }
             },

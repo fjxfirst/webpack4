@@ -1,4 +1,3 @@
-// 使用babel
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
@@ -26,39 +25,12 @@ module.exports = {
         host: 'localhost',
         compress: true
     },
-    devtool: "source-map",
     module: {
         rules: [
             {
-                test:/\.(js)$/,
-                use:{
-                    loader:'babel-loader',
-                    options:{
-                        "presets":[
-                            "@babel/preset-env",
-                            "@babel/preset-react"
-                        ],
-                        "plugins":[
-                            ['@babel/plugin-proposal-decorators',{legacy: true}], // legacy遗留的模式
-                            ['@babel/plugin-proposal-class-properties',{ loose : true }] // 松散模式
-                        ]
-                    }
-                }
-            },
-            {
                 test: /\.css$/,
                 // loader是一个函数,从右向左，从下向上
-                use: [MiniCssExtractPlugin.loader, 'css-loader','postcss-loader']
-            },
-            {
-                test: /\.less$/,
-                // loader是一个函数,从右向左，从下向上
-                use: [MiniCssExtractPlugin.loader, 'css-loader','less-loader']
-            },
-            {
-                test: /\.scss$/,
-                // loader是一个函数,从右向左，从下向上
-                use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
                 test: /\.(jpg|png|gif|jpeg|svg)$/,
@@ -73,16 +45,6 @@ module.exports = {
                         //需要重写路径
                         publicPath:'/img',
                         esModule:false
-                    }
-                }
-            },
-            {
-                test: /\.(eot|ttf|woff)$/,
-                // use:'file-loader'
-                use: {
-                    loader: 'url-loader',
-                    options: {
-
                     }
                 }
             },
@@ -122,7 +84,7 @@ module.exports = {
             }),
             //压缩css
             new OptimizeCssAssetsWebpackPlugin({
-                // assetNameRegExp: /\.css$/g, //指定要压缩的模块的正则
+                assetNameRegExp: /\.css$/g, //指定要压缩的模块的正则
                 // cssProcessor:require('cssnano')
             })
         ]

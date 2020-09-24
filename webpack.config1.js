@@ -70,7 +70,9 @@ module.exports = {
                 cache: true //开启缓存，会把上次压缩后的结果缓存
             }),
             //压缩css
-            new OptimizeCssAssetsWebpackPlugin({})
+            new OptimizeCssAssetsWebpackPlugin({
+
+            })
         ]
     }
 };
